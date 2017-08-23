@@ -19,20 +19,26 @@
     <!-- endbuild -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
-<body ng-app="appApp" ng-strict-di style="background-color:#152533">
+<body ng-app="appApp" ng-strict-di >
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <page-ribbon></page-ribbon>
-    <div ui-view="navbar" ng-cloak></div>
-    <div class="container">
-        <div ui-view="content">
+    <div ui-view="login">
+        <!-- Angular views -->
+    </div>
+    <div>
+        <div ui-view="navbar" ng-cloak></div>
+        <div class="container" style="background-color: #ffffff">
+
+        <div ui-view="content" >
             <!-- Angular views -->
         </div>
 
         <div class="footer" ng-cloak>
             <p data-translate="footer">This is your footer</p>
         </div>
+            </div>
     </div>
 
     <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.

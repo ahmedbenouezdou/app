@@ -9,13 +9,13 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('login', {
-            parent: 'account',
+            parent: 'applogin',
             url: '/',
             data: {
                 authorities: []
             },
             views: {
-                'content@': {
+                'login@': {
                     templateUrl: 'app/components/login/login.html',
                     controller: 'LoginController',
                     controllerAs: 'vm'
