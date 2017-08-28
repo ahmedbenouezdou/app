@@ -43,10 +43,18 @@ spring:
             hibernate.generate_statistics: true
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+          host:  smtp.gmail.com
+          port: 587
+          username: smtp-relay.gmail.com
+          password: hedi2040
+          protocol: smtp
+          tls: true
+          auth: true
+          properties.mail.smtp:
+               auth: true
+               starttls.enable: true
+               ssl.trust: smtp.gmail.com
+          from: ahmed.b.ouezdou@gmail.com
     messages:
         cache-seconds: 1
     thymeleaf:
