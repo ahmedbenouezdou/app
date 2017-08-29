@@ -440,11 +440,11 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bhoechie-tab-container">
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
             <div class="list-group">
-                <a href="#" class="list-group-item active text-center">
-                    <h4 class="glyphicon glyphicon-plane"></h4><br/>Flight
+                <a ui-sref-active="active" ui-sref="invest" class="list-group-item  text-center">
+                    <h4 class="glyphicon glyphicon-road"></h4><br/>How to invest
                 </a>
-                <a href="#" class="list-group-item text-center">
-                    <h4 class="glyphicon glyphicon-road"></h4><br/>Train
+                <a ui-sref-active="active" ui-sref="bye" class="list-group-item text-center">
+                    <h4 class="glyphicon glyphicon-road"></h4><br/>Buy token
                 </a>
                 <a href="#" class="list-group-item text-center">
                     <h4 class="glyphicon glyphicon-home"></h4><br/>Hotel
@@ -460,11 +460,8 @@
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
             <!-- flight section -->
             <div class="bhoechie-tab-content active">
-                <center>
-                    <h1 class="glyphicon glyphicon-plane" style="font-size:14em;color:#55518a"></h1>
-                    <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
-                    <h3 style="margin-top: 0;color:#55518a">Flight Reservation</h3>
-                </center>
+
+                <div ui-view="detail"></div>
             </div>
             <!-- train section -->
             <div class="bhoechie-tab-content">
