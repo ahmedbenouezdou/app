@@ -1,6 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
-import com.mycompany.myapp.AppApp;
+import com.mycompany.myapp.AccountPeculiumApp;
 import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.AuthorityRepository;
@@ -48,7 +48,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see AccountResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AppApp.class)
+@SpringBootTest(classes = AccountPeculiumApp.class)
 public class AccountResourceIntTest {
 
     @Autowired
@@ -164,7 +164,7 @@ public class AccountResourceIntTest {
             "joe@example.com",      // email
             true,                   // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -193,7 +193,7 @@ public class AccountResourceIntTest {
             "funky@example.com",    // email
             true,                   // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -222,7 +222,7 @@ public class AccountResourceIntTest {
             "invalid",          // email <-- invalid
             true,               // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -251,7 +251,36 @@ public class AccountResourceIntTest {
             "bob@example.com",  // email
             true,               // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
+            null,                   // createdBy
+            null,                   // createdDate
+            null,                   // lastModifiedBy
+            null,                   // lastModifiedDate
+            new HashSet<>(Collections.singletonList(AuthoritiesConstants.USER)));
+
+        restUserMockMvc.perform(
+            post("/api/register")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(invalidUser)))
+            .andExpect(status().isBadRequest());
+
+        Optional<User> user = userRepository.findOneByLogin("bob");
+        assertThat(user.isPresent()).isFalse();
+    }
+
+    @Test
+    @Transactional
+    public void testRegisterNullPassword() throws Exception {
+        ManagedUserVM invalidUser = new ManagedUserVM(
+            null,               // id
+            "bob",              // login
+            null,               // invalid null password
+            "Bob",              // firstName
+            "Green",            // lastName
+            "bob@example.com",  // email
+            true,               // activated
+            "http://placehold.it/50x50", //imageUrl
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -281,7 +310,7 @@ public class AccountResourceIntTest {
             "alice@example.com",    // email
             true,                   // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -323,7 +352,7 @@ public class AccountResourceIntTest {
             "john@example.com",     // email
             true,                   // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -364,7 +393,7 @@ public class AccountResourceIntTest {
             "badguy@example.com",   // email
             true,                   // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -430,7 +459,7 @@ public class AccountResourceIntTest {
             "save-account@example.com",    // email
             false,                   // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -475,7 +504,7 @@ public class AccountResourceIntTest {
             "invalid email",    // email
             false,                   // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -520,7 +549,7 @@ public class AccountResourceIntTest {
             "save-existing-email2@example.com",    // email
             false,                   // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy
@@ -550,12 +579,6 @@ public class AccountResourceIntTest {
 
         userRepository.saveAndFlush(user);
 
-        User anotherUser = new User();
-        anotherUser.setLogin("save-existing-email-and-login");
-        anotherUser.setEmail("save-existing-email-and-login@example.com");
-        anotherUser.setPassword(RandomStringUtils.random(60));
-        anotherUser.setActivated(true);
-
         UserDTO userDTO = new UserDTO(
             null,                   // id
             "not-used",          // login
@@ -564,7 +587,7 @@ public class AccountResourceIntTest {
             "save-existing-email-and-login@example.com",    // email
             false,                   // activated
             "http://placehold.it/50x50", //imageUrl
-            "fr",                   // langKey
+            "en",                   // langKey
             null,                   // createdBy
             null,                   // createdDate
             null,                   // lastModifiedBy

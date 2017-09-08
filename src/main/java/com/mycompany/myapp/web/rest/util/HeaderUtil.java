@@ -10,15 +10,15 @@ public final class HeaderUtil {
 
     private static final Logger log = LoggerFactory.getLogger(HeaderUtil.class);
 
-    private static final String APPLICATION_NAME = "appApp";
+    private static final String APPLICATION_NAME = "accountPeculiumApp";
 
     private HeaderUtil() {
     }
 
     public static HttpHeaders createAlert(String message, String param) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-appApp-alert", message);
-        headers.add("X-appApp-params", param);
+        headers.add("X-accountPeculiumApp-alert", message);
+        headers.add("X-accountPeculiumApp-params", param);
         return headers;
     }
 
@@ -37,8 +37,8 @@ public final class HeaderUtil {
     public static HttpHeaders createFailureAlert(String entityName, String errorKey, String defaultMessage) {
         log.error("Entity processing failed, {}", defaultMessage);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-appApp-error", "error." + errorKey);
-        headers.add("X-appApp-params", entityName);
+        headers.add("X-accountPeculiumApp-error", "error." + errorKey);
+        headers.add("X-accountPeculiumApp-params", entityName);
         return headers;
     }
 }

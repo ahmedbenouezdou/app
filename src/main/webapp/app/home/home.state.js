@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
@@ -10,7 +10,7 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('home', {
             parent: 'app',
-            url: '/home',
+            url: '/',
             data: {
                 authorities: []
             },

@@ -1,8 +1,9 @@
 {
-  "name": "app",
+  "name": "account-peculium",
   "version": "0.0.0",
-  "description": "Description for app",
+  "description": "Description for accountPeculium",
   "private": true,
+  "license": "UNLICENSED",
   "cacheDirectories": [
     "node_modules",
     "src/main/webapp/bower_components"
@@ -14,7 +15,7 @@
     "eslint-config-angular": "0.5.0",
     "eslint-plugin-angular": "2.2.1",
     "event-stream": "3.3.4",
-    "generator-jhipster": "4.5.2",
+    "generator-jhipster": "4.6.2",
     "gulp": "3.9.1",
     "gulp-angular-filesort": "1.1.1",
     "gulp-angular-templatecache": "2.0.0",

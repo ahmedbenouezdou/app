@@ -3,7 +3,7 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .factory('Base64', Base64);
 
     function Base64 () {

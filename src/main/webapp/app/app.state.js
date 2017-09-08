@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
@@ -16,21 +16,6 @@
                     controller: 'NavbarController',
                     controllerAs: 'vm'
                 }
-            },
-            resolve: {
-                authorize: ['Auth',
-                    function (Auth) {
-                        return Auth.authorize();
-                    }
-                ],
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('global');
-                }]
-            }
-        }).state('applogin', {
-            abstract: true,
-            views: {
-
             },
             resolve: {
                 authorize: ['Auth',

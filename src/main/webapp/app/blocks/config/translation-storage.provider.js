@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .factory('translationStorageProvider', translationStorageProvider);
 
     translationStorageProvider.$inject = ['$cookies', '$log', 'LANGUAGES'];
@@ -15,8 +15,8 @@
 
         function get(name) {
             if (LANGUAGES.indexOf($cookies.getObject(name)) === -1) {
-                $log.info('Resetting invalid cookie language "' + $cookies.getObject(name) + '" to preferred language "fr"');
-                $cookies.putObject(name, 'fr');
+                $log.info('Resetting invalid cookie language "' + $cookies.getObject(name) + '" to preferred language "en"');
+                $cookies.putObject(name, 'en');
             }
             return $cookies.getObject(name);
         }

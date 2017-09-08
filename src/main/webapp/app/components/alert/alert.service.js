@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .provider('AlertService', AlertService);
 
     function AlertService () {

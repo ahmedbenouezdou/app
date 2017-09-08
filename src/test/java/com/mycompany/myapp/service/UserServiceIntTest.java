@@ -1,6 +1,6 @@
 package com.mycompany.myapp.service;
 
-import com.mycompany.myapp.AppApp;
+import com.mycompany.myapp.AccountPeculiumApp;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.config.Constants;
 import com.mycompany.myapp.repository.UserRepository;
@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.*;
  * @see UserService
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AppApp.class)
+@SpringBootTest(classes = AccountPeculiumApp.class)
 @Transactional
 public class UserServiceIntTest {
 

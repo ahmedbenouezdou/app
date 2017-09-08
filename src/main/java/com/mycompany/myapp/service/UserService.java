@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,11 +38,14 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    public final JdbcTokenStore jdbcTokenStore;
+
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JdbcTokenStore jdbcTokenStore, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jdbcTokenStore = jdbcTokenStore;
         this.authorityRepository = authorityRepository;
     }
 
@@ -114,7 +118,7 @@ public class UserService {
         user.setEmail(userDTO.getEmail());
         user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
-            user.setLangKey("fr"); // default language
+            user.setLangKey("en"); // default language
         } else {
             user.setLangKey(userDTO.getLangKey());
         }
@@ -184,6 +188,8 @@ public class UserService {
     }
 
     public void deleteUser(String login) {
+        jdbcTokenStore.findTokensByUserName(login).forEach(token ->
+            jdbcTokenStore.removeAccessToken(token));
         userRepository.findOneByLogin(login).ifPresent(user -> {
             userRepository.delete(user);
             log.debug("Deleted User: {}", user);
@@ -223,7 +229,6 @@ public class UserService {
      * Not activated users should be automatically deleted after 3 days.
      * <p>
      * This is scheduled to get fired everyday, at 01:00 (am).
-     * </p>
      */
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {

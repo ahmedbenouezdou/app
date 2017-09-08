@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .factory('translationHandler', translationHandler);
 
     translationHandler.$inject = ['$rootScope', '$window', '$state', '$translate'];
@@ -25,6 +25,7 @@
                 }
             });
         }
+
 
         // update the window title using params in the following
         // precedence

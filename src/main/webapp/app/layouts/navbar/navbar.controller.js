@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .controller('NavbarController', NavbarController);
 
     NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
@@ -26,14 +26,13 @@
 
         function login() {
             collapseNavbar();
-            $state.go('login');
-           // LoginService.open();
+            LoginService.open();
         }
 
         function logout() {
             collapseNavbar();
             Auth.logout();
-            $state.go('login');
+            $state.go('home');
         }
 
         function toggleNavbar() {

@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -29,22 +29,21 @@
                 rememberMe: true
             };
             vm.authenticationError = false;
+            $uibModalInstance.dismiss('cancel');
         }
 
-        function login () {
-           // event.preventDefault();
+        function login (event) {
+            event.preventDefault();
             Auth.login({
                 username: vm.username,
                 password: vm.password,
                 rememberMe: vm.rememberMe
             }).then(function () {
                 vm.authenticationError = false;
+                $uibModalInstance.close();
                 if ($state.current.name === 'register' || $state.current.name === 'activate' ||
                     $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
-                    $state.go('login');
-                }else if($state.current.name === 'login'){
                     $state.go('home');
-
                 }
 
                 $rootScope.$broadcast('authenticationSuccess');
@@ -62,10 +61,12 @@
         }
 
         function register () {
+            $uibModalInstance.dismiss('cancel');
             $state.go('register');
         }
 
         function requestResetPassword () {
+            $uibModalInstance.dismiss('cancel');
             $state.go('requestReset');
         }
     }

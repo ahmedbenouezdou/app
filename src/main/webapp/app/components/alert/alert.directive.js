@@ -11,7 +11,7 @@
     };
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .component('jhiAlert', jhiAlert);
 
     jhiAlertController.$inject = ['$scope', 'AlertService'];

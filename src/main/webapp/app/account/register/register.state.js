@@ -2,21 +2,21 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
         $stateProvider.state('register', {
-            parent: 'applogin',
+            parent: 'account',
             url: '/register',
             data: {
                 authorities: [],
                 pageTitle: 'register.title'
             },
             views: {
-                'login@': {
+                'content@': {
                     templateUrl: 'app/account/register/register.html',
                     controller: 'RegisterController',
                     controllerAs: 'vm'

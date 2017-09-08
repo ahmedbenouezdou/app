@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .controller('LogsController', LogsController);
 
     LogsController.$inject = ['LogsService'];

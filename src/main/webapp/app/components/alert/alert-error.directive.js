@@ -11,7 +11,7 @@
     };
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .component('jhiAlertError', jhiAlertError);
 
     jhiAlertErrorController.$inject = ['$scope', 'AlertService', '$rootScope', '$translate'];
@@ -38,7 +38,7 @@
             );
         }
 
-        var cleanHttpErrorListener = $rootScope.$on('appApp.httpError', function (event, httpResponse) {
+        var cleanHttpErrorListener = $rootScope.$on('accountPeculiumApp.httpError', function (event, httpResponse) {
             var i;
             event.stopPropagation();
             switch (httpResponse.status) {
@@ -53,7 +53,7 @@
                 }).sort();
                 var errorHeader = httpResponse.headers(headers[0]);
                 var entityKey = httpResponse.headers(headers[1]);
-                if (errorHeader) {
+                if (angular.isString(errorHeader)) {
                     var entityName = $translate.instant('global.menu.entities.' + entityKey);
                     addErrorAlert(errorHeader, errorHeader, {entityName: entityName});
                 } else if (httpResponse.data && httpResponse.data.fieldErrors) {
@@ -61,7 +61,7 @@
                         var fieldError = httpResponse.data.fieldErrors[i];
                         // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
                         var convertedField = fieldError.field.replace(/\[\d*\]/g, '[]');
-                        var fieldName = $translate.instant('appApp.' + fieldError.objectName + '.' + convertedField);
+                        var fieldName = $translate.instant('accountPeculiumApp.' + fieldError.objectName + '.' + convertedField);
                         addErrorAlert('Field ' + fieldName + ' cannot be empty', 'error.' + fieldError.message, {fieldName: fieldName});
                     }
                 } else if (httpResponse.data && httpResponse.data.message) {

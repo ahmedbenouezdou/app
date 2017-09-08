@@ -1,4 +1,4 @@
-// Generated on 2017-08-21 using generator-jhipster 4.5.2
+// Generated on 2017-09-05 using generator-jhipster 4.6.2
 'use strict';
 
 var gulp = require('gulp'),
@@ -103,7 +103,7 @@ gulp.task('html', function () {
     return gulp.src(config.app + 'app/**/*.html')
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(templateCache({
-            module: 'appApp',
+            module: 'accountPeculiumApp',
             root: 'app/',
             moduleSystem: 'IIFE'
         }))
@@ -112,10 +112,11 @@ gulp.task('html', function () {
 
 gulp.task('ngconstant:dev', function () {
     return ngConstant({
-        name: 'appApp',
+        name: 'accountPeculiumApp',
         constants: {
             VERSION: util.parseVersion(),
-            DEBUG_INFO_ENABLED: true
+            DEBUG_INFO_ENABLED: true,
+            BUILD_TIMESTAMP: ''
         },
         template: config.constantTemplate,
         stream: true
@@ -126,10 +127,11 @@ gulp.task('ngconstant:dev', function () {
 
 gulp.task('ngconstant:prod', function () {
     return ngConstant({
-        name: 'appApp',
+        name: 'accountPeculiumApp',
         constants: {
             VERSION: util.parseVersion(),
-            DEBUG_INFO_ENABLED: false
+            DEBUG_INFO_ENABLED: false,
+            BUILD_TIMESTAMP: new Date().getTime()
         },
         template: config.constantTemplate,
         stream: true

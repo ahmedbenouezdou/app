@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('appApp')
+        .module('accountPeculiumApp')
         .factory('LogsService', LogsService);
 
     LogsService.$inject = ['$resource'];

@@ -1,14 +1,14 @@
 version: '2'
 services:
-    app-app:
-        image: app
+    accountpeculium-app:
+        image: accountpeculium
         environment:
             - SPRING_PROFILES_ACTIVE=prod,swagger
-            - SPRING_DATASOURCE_URL=jdbc:mysql://app-mysql:3306/app?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://accountpeculium-postgresql:5432/accountPeculium
             - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
         ports:
             - 8080:8080
-    app-mysql:
+    accountpeculium-postgresql:
         extends:
-            file: mysql.yml
-            service: app-mysql
+            file: postgresql.yml
+            service: accountpeculium-postgresql
